@@ -1,10 +1,14 @@
-FROM python:3.11-alpine
+FROM python:3.11
 
+WORKDIR /code
 
-RUN pip3 install --upgrade pip
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+COPY requirements.txt requirements.txt
+
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . .
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "6090"]
+#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "6090"]
