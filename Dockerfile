@@ -1,14 +1,10 @@
-FROM python:3.11
-
-WORKDIR /code
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-COPY requirements.txt requirements.txt
-
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
-
+FROM python:3.12
+RUN mkdir /fastapi_app
+WORKDIR /fastapi_app
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 COPY . .
+WORKDIR /fastapi_app
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "6090"]
+CMD gunicorn main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000
