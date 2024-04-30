@@ -4,4 +4,4 @@ python-dotenv==1.0.1
 requests==2.31.0
 SQLAlchemy==2.0.29
 uvicorn==0.28.0
-gunicorn==19.9.0
+gunicorn
