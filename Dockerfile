@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 COPY . .
 WORKDIR /fastapi_app
 
-CMD gunicorn main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000
+CMD gunicorn app/main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000
